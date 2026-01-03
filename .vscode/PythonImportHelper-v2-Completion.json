@@ -1,14 +1,6 @@
 [
     {
-        "label": "FastAPI",
-        "importPath": "fastapi",
-        "description": "fastapi",
-        "isExtraImport": true,
-        "detail": "fastapi",
-        "documentation": {}
-    },
-    {
-        "label": "HTTPException",
+        "label": "APIRouter",
         "importPath": "fastapi",
         "description": "fastapi",
         "isExtraImport": true,
@@ -24,11 +16,35 @@
         "documentation": {}
     },
     {
-        "label": "BaseModel",
-        "importPath": "pydantic",
-        "description": "pydantic",
+        "label": "HTTPException",
+        "importPath": "fastapi",
+        "description": "fastapi",
         "isExtraImport": true,
-        "detail": "pydantic",
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "Book",
+        "importPath": "src.books.schemas",
+        "description": "src.books.schemas",
+        "isExtraImport": true,
+        "detail": "src.books.schemas",
+        "documentation": {}
+    },
+    {
+        "label": "BookUpdateModel",
+        "importPath": "src.books.schemas",
+        "description": "src.books.schemas",
+        "isExtraImport": true,
+        "detail": "src.books.schemas",
+        "documentation": {}
+    },
+    {
+        "label": "books_db",
+        "importPath": "src.books.book_data",
+        "description": "src.books.book_data",
+        "isExtraImport": true,
+        "detail": "src.books.book_data",
         "documentation": {}
     },
     {
@@ -40,39 +56,47 @@
         "documentation": {}
     },
     {
-        "label": "Book",
-        "kind": 6,
-        "importPath": "main",
-        "description": "main",
-        "peekOfCode": "class Book(BaseModel):\n    id: int\n    title: str\n    author: str\n    publisher: str\n    published_date: str\n    page_count: int\n    language: str\nclass BookUpdateModel(BaseModel):\n    title: str",
-        "detail": "main",
-        "documentation": {}
-    },
-    {
-        "label": "BookUpdateModel",
-        "kind": 6,
-        "importPath": "main",
-        "description": "main",
-        "peekOfCode": "class BookUpdateModel(BaseModel):\n    title: str\n    author: str\n    publisher: str\n    published_date: str\n    page_count: int\n    language: str\n# GET ALL BOOKS\n@server.get(\"/books\", response_model=List[Book])\nasync def get_all_books():",
-        "detail": "main",
-        "documentation": {}
-    },
-    {
-        "label": "server",
-        "kind": 5,
-        "importPath": "main",
-        "description": "main",
-        "peekOfCode": "server = FastAPI()\n# Books database with static data\nbooks_db = [\n    {\n        \"id\": 1,\n        \"title\": \"Think Python\",\n        \"author\": \"Allen B. Downey\",\n        \"publisher\": \"O'Reilly Media\",\n        \"published_date\": \"2021-01-01\",\n        \"page_count\": 1234,",
-        "detail": "main",
+        "label": "BaseModel",
+        "importPath": "pydantic",
+        "description": "pydantic",
+        "isExtraImport": true,
+        "detail": "pydantic",
         "documentation": {}
     },
     {
         "label": "books_db",
         "kind": 5,
-        "importPath": "main",
-        "description": "main",
+        "importPath": "src.books.book_data",
+        "description": "src.books.book_data",
         "peekOfCode": "books_db = [\n    {\n        \"id\": 1,\n        \"title\": \"Think Python\",\n        \"author\": \"Allen B. Downey\",\n        \"publisher\": \"O'Reilly Media\",\n        \"published_date\": \"2021-01-01\",\n        \"page_count\": 1234,\n        \"language\": \"English\",\n    },",
-        "detail": "main",
+        "detail": "src.books.book_data",
+        "documentation": {}
+    },
+    {
+        "label": "book_router",
+        "kind": 5,
+        "importPath": "src.books.routes",
+        "description": "src.books.routes",
+        "peekOfCode": "book_router = APIRouter()\n# GET ALL BOOKS\n@book_router.get(\"/\", response_model=List[Book])\nasync def get_all_books():\n    return books_db\n# CREATE BOOK\n@book_router.post(\"/\", status_code=status.HTTP_201_CREATED)\nasync def create_book(book_data: Book) -> dict:\n    new_book = book_data.model_dump()\n    # CHECK IF BOOK ID ALREADY EXISTS",
+        "detail": "src.books.routes",
+        "documentation": {}
+    },
+    {
+        "label": "Book",
+        "kind": 6,
+        "importPath": "src.books.schemas",
+        "description": "src.books.schemas",
+        "peekOfCode": "class Book(BaseModel):\n    id: int\n    title: str\n    author: str\n    publisher: str\n    published_date: str\n    page_count: int\n    language: str\nclass BookUpdateModel(BaseModel):\n    title: str",
+        "detail": "src.books.schemas",
+        "documentation": {}
+    },
+    {
+        "label": "BookUpdateModel",
+        "kind": 6,
+        "importPath": "src.books.schemas",
+        "description": "src.books.schemas",
+        "peekOfCode": "class BookUpdateModel(BaseModel):\n    title: str\n    author: str\n    publisher: str\n    published_date: str\n    page_count: int\n    language: str",
+        "detail": "src.books.schemas",
         "documentation": {}
     }
 ]
