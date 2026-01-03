@@ -80,7 +80,7 @@ async def get_all_students():
 
 # CREATE STUDENT
 @server.post("/students", status_code=status.HTTP_201_CREATED)
-async def create_student(student_data: Student):
+async def create_student(student_data: Student) -> list:
     new_student = student_data.model_dump()
     # LOOP STUDENTS DB
     for student in students_db:
@@ -119,7 +119,7 @@ async def get_student(student_id: int) -> dict:
 @server.patch("/students/{student_id}")
 async def update_student_record(
     student_id: int, student_update_data: UpdateStudentModel
-):
+) -> dict:
     new_student_data = student_update_data.model_dump()
     for student in students_db:
         if student["student_id"] == student_id:
@@ -129,6 +129,21 @@ async def update_student_record(
             return {
                 "message": "Student info updated successfully",
                 "student_info": student,
+            }
+
+    raise HTTPException(
+        status_code=status.HTTP_404_NOT_FOUND, detail={"message": "Student not found."}
+    )
+
+
+@server.delete("/student/{student_id}")
+async def delete_student(student_id: int) -> dict:
+    for index, student in enumerate(students_db):
+        if student["student_id"] == student_id:
+            removed_student = students_db.pop(index)
+            return {
+                "message": "Student's record deleted successfully.",
+                "student_info": removed_student,
             }
 
     raise HTTPException(
