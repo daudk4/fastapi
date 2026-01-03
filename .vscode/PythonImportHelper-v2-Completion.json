@@ -8,22 +8,6 @@
         "documentation": {}
     },
     {
-        "label": "Header",
-        "importPath": "fastapi",
-        "description": "fastapi",
-        "isExtraImport": true,
-        "detail": "fastapi",
-        "documentation": {}
-    },
-    {
-        "label": "FastAPI",
-        "importPath": "fastapi",
-        "description": "fastapi",
-        "isExtraImport": true,
-        "detail": "fastapi",
-        "documentation": {}
-    },
-    {
         "label": "HTTPException",
         "importPath": "fastapi",
         "description": "fastapi",
@@ -40,11 +24,11 @@
         "documentation": {}
     },
     {
-        "label": "Optional",
-        "importPath": "typing",
-        "description": "typing",
+        "label": "BaseModel",
+        "importPath": "pydantic",
+        "description": "pydantic",
         "isExtraImport": true,
-        "detail": "typing",
+        "detail": "pydantic",
         "documentation": {}
     },
     {
@@ -56,73 +40,39 @@
         "documentation": {}
     },
     {
-        "label": "BaseModel",
-        "importPath": "pydantic",
-        "description": "pydantic",
-        "isExtraImport": true,
-        "detail": "pydantic",
-        "documentation": {}
-    },
-    {
-        "label": "BaseModel",
-        "importPath": "pydantic",
-        "description": "pydantic",
-        "isExtraImport": true,
-        "detail": "pydantic",
-        "documentation": {}
-    },
-    {
-        "label": "CreateUserModal",
+        "label": "Book",
         "kind": 6,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "class CreateUserModal(BaseModel):\n    user_name: str\n    full_name: str\n    age: int\n@app.post(\"/create_user\")\nasync def create_new_user(user_data: CreateUserModal):\n    return user_data\n@app.get(\"/get-headers\")\nasync def get_headers(accept: str = Header(None), content_type: str = Header(None)):\n    request_headers = {}",
+        "peekOfCode": "class Book(BaseModel):\n    id: int\n    title: str\n    author: str\n    publisher: str\n    published_date: str\n    page_count: int\n    language: str\nclass BookUpdateModel(BaseModel):\n    title: str",
         "detail": "main",
         "documentation": {}
     },
     {
-        "label": "app",
-        "kind": 5,
+        "label": "BookUpdateModel",
+        "kind": 6,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "app = FastAPI()\n@app.get(\"/\")\nasync def read_root() -> dict:\n    return {\"message\": \"Hello root\"}\n# PATH PARAMETER:\n@app.get(\"/greet/{user_name}\")\nasync def greet_user(user_name: str) -> dict:\n    return {\"message\": f\"Welcome back {user_name}\"}\n# QUERY PARAMETER:\n@app.get(\"/goodbye\")",
+        "peekOfCode": "class BookUpdateModel(BaseModel):\n    title: str\n    author: str\n    publisher: str\n    published_date: str\n    page_count: int\n    language: str\n# GET ALL BOOKS\n@server.get(\"/books\", response_model=List[Book])\nasync def get_all_books():",
         "detail": "main",
-        "documentation": {}
-    },
-    {
-        "label": "Student",
-        "kind": 6,
-        "importPath": "students",
-        "description": "students",
-        "peekOfCode": "class Student(BaseModel):\n    student_id: int\n    roll_no: str\n    name: str\n    age: int\n    department: str\n    semester: int\n    cgpa: float\nclass UpdateStudentModel(BaseModel):\n    name: str",
-        "detail": "students",
-        "documentation": {}
-    },
-    {
-        "label": "UpdateStudentModel",
-        "kind": 6,
-        "importPath": "students",
-        "description": "students",
-        "peekOfCode": "class UpdateStudentModel(BaseModel):\n    name: str\n    age: int\n    semester: int\n    cgpa: float\n# GET ALL STUDENTS\n@server.get(\"/students\", response_model=List[Student])\nasync def get_all_students():\n    return students_db\n# CREATE STUDENT",
-        "detail": "students",
         "documentation": {}
     },
     {
         "label": "server",
         "kind": 5,
-        "importPath": "students",
-        "description": "students",
-        "peekOfCode": "server = FastAPI()\nstudents_db = [\n    {\n        \"student_id\": 1,\n        \"roll_no\": \"CS-101\",\n        \"name\": \"Ali Khan\",\n        \"age\": 20,\n        \"department\": \"Computer Science\",\n        \"semester\": 4,\n        \"cgpa\": 3.45,",
-        "detail": "students",
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "server = FastAPI()\n# Books database with static data\nbooks_db = [\n    {\n        \"id\": 1,\n        \"title\": \"Think Python\",\n        \"author\": \"Allen B. Downey\",\n        \"publisher\": \"O'Reilly Media\",\n        \"published_date\": \"2021-01-01\",\n        \"page_count\": 1234,",
+        "detail": "main",
         "documentation": {}
     },
     {
-        "label": "students_db",
+        "label": "books_db",
         "kind": 5,
-        "importPath": "students",
-        "description": "students",
-        "peekOfCode": "students_db = [\n    {\n        \"student_id\": 1,\n        \"roll_no\": \"CS-101\",\n        \"name\": \"Ali Khan\",\n        \"age\": 20,\n        \"department\": \"Computer Science\",\n        \"semester\": 4,\n        \"cgpa\": 3.45,\n    },",
-        "detail": "students",
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "books_db = [\n    {\n        \"id\": 1,\n        \"title\": \"Think Python\",\n        \"author\": \"Allen B. Downey\",\n        \"publisher\": \"O'Reilly Media\",\n        \"published_date\": \"2021-01-01\",\n        \"page_count\": 1234,\n        \"language\": \"English\",\n    },",
+        "detail": "main",
         "documentation": {}
     }
 ]
