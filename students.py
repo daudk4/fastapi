@@ -136,14 +136,17 @@ async def update_student_record(
     )
 
 
-@server.delete("/student/{student_id}")
+# DELETE STUDENT RECORD
+@server.delete("/student/{student_id}", status_code=status.HTTP_200_OK)
 async def delete_student(student_id: int) -> dict:
     for index, student in enumerate(students_db):
         if student["student_id"] == student_id:
-            removed_student = students_db.pop(index)
+            # 👇🏻 This also removes the student from student's list
+            students_db.remove(student)
+            # removed_student = students_db.pop(index)
             return {
                 "message": "Student's record deleted successfully.",
-                "student_info": removed_student,
+                # "student_info": removed_student,
             }
 
     raise HTTPException(
