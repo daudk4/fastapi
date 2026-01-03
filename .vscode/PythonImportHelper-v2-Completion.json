@@ -32,6 +32,14 @@
         "documentation": {}
     },
     {
+        "label": "status",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
         "label": "Optional",
         "importPath": "typing",
         "description": "typing",
@@ -86,7 +94,16 @@
         "kind": 6,
         "importPath": "students",
         "description": "students",
-        "peekOfCode": "class Student(BaseModel):\n    student_id: int\n    roll_no: str\n    name: str\n    age: int\n    department: str\n    semester: int\n    cgpa: float\n@server.get(\"/students\", response_model=List[Student])\nasync def get_all_students():",
+        "peekOfCode": "class Student(BaseModel):\n    student_id: int\n    roll_no: str\n    name: str\n    age: int\n    department: str\n    semester: int\n    cgpa: float\nclass UpdateStudentModel(BaseModel):\n    name: str",
+        "detail": "students",
+        "documentation": {}
+    },
+    {
+        "label": "UpdateStudentModel",
+        "kind": 6,
+        "importPath": "students",
+        "description": "students",
+        "peekOfCode": "class UpdateStudentModel(BaseModel):\n    name: str\n    age: int\n    semester: int\n    cgpa: float\n# GET ALL STUDENTS\n@server.get(\"/students\", response_model=List[Student])\nasync def get_all_students():\n    return students_db\n# CREATE STUDENT",
         "detail": "students",
         "documentation": {}
     },

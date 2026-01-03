@@ -1,4 +1,4 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, status
 from pydantic import BaseModel
 from typing import List
 
@@ -65,26 +65,72 @@ class Student(BaseModel):
     cgpa: float
 
 
+class UpdateStudentModel(BaseModel):
+    name: str
+    age: int
+    semester: int
+    cgpa: float
+
+
+# GET ALL STUDENTS
 @server.get("/students", response_model=List[Student])
 async def get_all_students():
     return students_db
 
 
-@server.post("/students")
+# CREATE STUDENT
+@server.post("/students", status_code=status.HTTP_201_CREATED)
 async def create_student(student_data: Student):
+    new_student = student_data.model_dump()
     # LOOP STUDENTS DB
     for student in students_db:
         # CHECK IF STUDENT ID ALREADY EXISTS
-        if student["student_id"] == student_data.student_id:
+        if student["student_id"] == new_student["student_id"]:
             raise HTTPException(
-                status_code=400, detail={"message": "Student ID already exists!"}
+                status_code=status.HTTP_409_CONFLICT,
+                detail={"message": "Student ID already exists!"},
             )
 
         # CHECK IF ROLL NUMBER ALREADY EXISTS
-        if student["roll_no"].lower() == student_data.roll_no.lower():
+        if student["roll_no"].lower() == new_student["roll_no"].lower():
             raise HTTPException(
-                status_code=400, detail={"message": "Roll number already exists!"}
+                status_code=status.HTTP_409_CONFLICT,
+                detail={"message": "Roll number already exists!"},
             )
 
-    students_db.append(student_data.model_dump())
+    students_db.append(new_student)
     return {"message": "Student added successfully"}
+
+
+# GET STUDENT BY ID
+@server.get("/students/{student_id}")
+async def get_student(student_id: int) -> dict:
+    for student in students_db:
+        if student_id == student["student_id"]:
+            return student
+
+    raise HTTPException(
+        status_code=status.HTTP_404_NOT_FOUND,
+        detail={"message": "Student not found."},
+    )
+
+
+# UPDATE STUDENT RECORD
+@server.patch("/students/{student_id}")
+async def update_student_record(
+    student_id: int, student_update_data: UpdateStudentModel
+):
+    new_student_data = student_update_data.model_dump()
+    for student in students_db:
+        if student["student_id"] == student_id:
+            for key, value in new_student_data.items():
+                student[key] = value
+
+            return {
+                "message": "Student info updated successfully",
+                "student_info": student,
+            }
+
+    raise HTTPException(
+        status_code=status.HTTP_404_NOT_FOUND, detail={"message": "Student not found."}
+    )
