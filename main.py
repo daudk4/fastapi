@@ -1,4 +1,6 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Header
+from typing import Optional
+from pydantic import BaseModel
 
 app = FastAPI()
 
@@ -36,3 +38,29 @@ async def is_license_valid(name: str, age: int) -> dict:
         return {"message": f"{name}, your license is valid", "is_valid": True}
     else:
         return {"message": f"{name}, your license is not valid", "is_valid": False}
+
+
+# OPTIONAL QUERY PARAMS
+# IMPORT OPTIONAL FROM TYPING
+@app.get("/greet")
+async def greet(name: Optional[str] = "User", age: Optional[int] = 00):
+    return {"name": name, "age": age}
+
+
+class CreateUserModal(BaseModel):
+    user_name: str
+    full_name: str
+    age: int
+
+
+@app.post("/create_user")
+async def create_new_user(user_data: CreateUserModal):
+    return user_data
+
+
+@app.get("/get-headers")
+async def get_headers(accept: str = Header(None), content_type: str = Header(None)):
+    request_headers = {}
+    request_headers["Accept"] = accept
+    request_headers["Content-Type"] = content_type
+    return request_headers
