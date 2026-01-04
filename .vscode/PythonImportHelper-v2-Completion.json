@@ -64,6 +64,22 @@
         "documentation": {}
     },
     {
+        "label": "BaseSettings",
+        "importPath": "pydantic_settings",
+        "description": "pydantic_settings",
+        "isExtraImport": true,
+        "detail": "pydantic_settings",
+        "documentation": {}
+    },
+    {
+        "label": "SettingsConfigDict",
+        "importPath": "pydantic_settings",
+        "description": "pydantic_settings",
+        "isExtraImport": true,
+        "detail": "pydantic_settings",
+        "documentation": {}
+    },
+    {
         "label": "books_db",
         "kind": 5,
         "importPath": "src.books.book_data",
@@ -97,6 +113,15 @@
         "description": "src.books.schemas",
         "peekOfCode": "class BookUpdateModel(BaseModel):\n    title: str\n    author: str\n    publisher: str\n    published_date: str\n    page_count: int\n    language: str",
         "detail": "src.books.schemas",
+        "documentation": {}
+    },
+    {
+        "label": "Settings",
+        "kind": 6,
+        "importPath": "src.config",
+        "description": "src.config",
+        "peekOfCode": "class Settings(BaseSettings):\n    DATABASE_URL: str\n    model_config = SettingsConfigDict(env_file=\".env\", extra=\"ignore\")",
+        "detail": "src.config",
         "documentation": {}
     }
 ]
