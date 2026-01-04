@@ -1,5 +1,37 @@
 [
     {
+        "label": "SQLModel",
+        "importPath": "sqlmodel",
+        "description": "sqlmodel",
+        "isExtraImport": true,
+        "detail": "sqlmodel",
+        "documentation": {}
+    },
+    {
+        "label": "create_engine",
+        "importPath": "sqlmodel",
+        "description": "sqlmodel",
+        "isExtraImport": true,
+        "detail": "sqlmodel",
+        "documentation": {}
+    },
+    {
+        "label": "text",
+        "importPath": "sqlmodel",
+        "description": "sqlmodel",
+        "isExtraImport": true,
+        "detail": "sqlmodel",
+        "documentation": {}
+    },
+    {
+        "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
         "label": "APIRouter",
         "importPath": "fastapi",
         "description": "fastapi",
@@ -64,6 +96,22 @@
         "documentation": {}
     },
     {
+        "label": "AsyncEngine",
+        "importPath": "sqlalchemy.ext.asyncio",
+        "description": "sqlalchemy.ext.asyncio",
+        "isExtraImport": true,
+        "detail": "sqlalchemy.ext.asyncio",
+        "documentation": {}
+    },
+    {
+        "label": "Config",
+        "importPath": "src.config",
+        "description": "src.config",
+        "isExtraImport": true,
+        "detail": "src.config",
+        "documentation": {}
+    },
+    {
         "label": "BaseSettings",
         "importPath": "pydantic_settings",
         "description": "pydantic_settings",
@@ -86,6 +134,15 @@
         "description": "src.books.book_data",
         "peekOfCode": "books_db = [\n    {\n        \"id\": 1,\n        \"title\": \"Think Python\",\n        \"author\": \"Allen B. Downey\",\n        \"publisher\": \"O'Reilly Media\",\n        \"published_date\": \"2021-01-01\",\n        \"page_count\": 1234,\n        \"language\": \"English\",\n    },",
         "detail": "src.books.book_data",
+        "documentation": {}
+    },
+    {
+        "label": "Book",
+        "kind": 6,
+        "importPath": "src.books.models",
+        "description": "src.books.models",
+        "peekOfCode": "class Book(SQLModel, table=True):\n    id: int\n    title: str\n    author: str\n    publisher: str\n    published_date: str\n    page_count: int\n    language: str\n    created_at: datetime\n    updated_at: datetime",
+        "detail": "src.books.models",
         "documentation": {}
     },
     {
@@ -116,11 +173,29 @@
         "documentation": {}
     },
     {
+        "label": "engine",
+        "kind": 5,
+        "importPath": "src.db.main",
+        "description": "src.db.main",
+        "peekOfCode": "engine = AsyncEngine(create_engine(url=Config.DATABASE_URL, echo=True))\nasync def init_db():\n    async with engine.begin() as conn:\n        statement = text(\"SELECT 'hello';\")\n        result = await conn.execute(statement)\n        print(result.all())",
+        "detail": "src.db.main",
+        "documentation": {}
+    },
+    {
         "label": "Settings",
         "kind": 6,
         "importPath": "src.config",
         "description": "src.config",
-        "peekOfCode": "class Settings(BaseSettings):\n    DATABASE_URL: str\n    model_config = SettingsConfigDict(env_file=\".env\", extra=\"ignore\")",
+        "peekOfCode": "class Settings(BaseSettings):\n    DATABASE_URL: str\n    model_config = SettingsConfigDict(env_file=\".env\", extra=\"ignore\")\nConfig = Settings()",
+        "detail": "src.config",
+        "documentation": {}
+    },
+    {
+        "label": "Config",
+        "kind": 5,
+        "importPath": "src.config",
+        "description": "src.config",
+        "peekOfCode": "Config = Settings()",
         "detail": "src.config",
         "documentation": {}
     }
