@@ -11,7 +11,7 @@ class Book(SQLModel, table=True):
             PG.UUID,
             nullable=False,
             primary_key=True,
-            default=uuid.uuid4(),
+            default=uuid.uuid4,
         )
     )
     title: str
