@@ -41,6 +41,14 @@
         "documentation": {}
     },
     {
+        "label": "func",
+        "importPath": "sqlalchemy.sql",
+        "description": "sqlalchemy.sql",
+        "isExtraImport": true,
+        "detail": "sqlalchemy.sql",
+        "documentation": {}
+    },
+    {
         "label": "datetime",
         "importPath": "datetime",
         "description": "datetime",
@@ -167,7 +175,7 @@
         "kind": 6,
         "importPath": "src.books.models",
         "description": "src.books.models",
-        "peekOfCode": "class Book(SQLModel, table=True):\n    __tablename__ = \"books\"\n    uid: uuid.UUID = Field(\n        sa_column=Column(\n            PG.UUID,\n            nullable=False,\n            primary_key=True,\n            default=uuid.uuid4,\n        )\n    )",
+        "peekOfCode": "class Book(SQLModel, table=True):\n    __tablename__ = \"books\"\n    uid: uuid.UUID = Field(\n        sa_column=Column(\n            PG.UUID(as_uuid=True),\n            nullable=False,\n            primary_key=True,\n            default=uuid.uuid4,\n        )\n    )",
         "detail": "src.books.models",
         "documentation": {}
     },
