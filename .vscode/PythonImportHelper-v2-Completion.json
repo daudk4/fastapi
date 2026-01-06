@@ -8,7 +8,7 @@
         "documentation": {}
     },
     {
-        "label": "create_engine",
+        "label": "Field",
         "importPath": "sqlmodel",
         "description": "sqlmodel",
         "isExtraImport": true,
@@ -16,11 +16,28 @@
         "documentation": {}
     },
     {
-        "label": "text",
+        "label": "Column",
         "importPath": "sqlmodel",
         "description": "sqlmodel",
         "isExtraImport": true,
         "detail": "sqlmodel",
+        "documentation": {}
+    },
+    {
+        "label": "SQLModel",
+        "importPath": "sqlmodel",
+        "description": "sqlmodel",
+        "isExtraImport": true,
+        "detail": "sqlmodel",
+        "documentation": {}
+    },
+    {
+        "label": "sqlalchemy.dialects.postgresql",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "sqlalchemy.dialects.postgresql",
+        "description": "sqlalchemy.dialects.postgresql",
+        "detail": "sqlalchemy.dialects.postgresql",
         "documentation": {}
     },
     {
@@ -29,6 +46,15 @@
         "description": "datetime",
         "isExtraImport": true,
         "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "uuid",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "uuid",
+        "description": "uuid",
+        "detail": "uuid",
         "documentation": {}
     },
     {
@@ -96,7 +122,7 @@
         "documentation": {}
     },
     {
-        "label": "AsyncEngine",
+        "label": "create_async_engine",
         "importPath": "sqlalchemy.ext.asyncio",
         "description": "sqlalchemy.ext.asyncio",
         "isExtraImport": true,
@@ -141,7 +167,7 @@
         "kind": 6,
         "importPath": "src.books.models",
         "description": "src.books.models",
-        "peekOfCode": "class Book(SQLModel, table=True):\n    id: int\n    title: str\n    author: str\n    publisher: str\n    published_date: str\n    page_count: int\n    language: str\n    created_at: datetime\n    updated_at: datetime",
+        "peekOfCode": "class Book(SQLModel, table=True):\n    __tablename__ = \"books\"\n    uid: uuid.UUID = Field(\n        sa_column=Column(\n            PG.UUID,\n            nullable=False,\n            primary_key=True,\n            default=uuid.uuid4(),\n        )\n    )",
         "detail": "src.books.models",
         "documentation": {}
     },
@@ -177,7 +203,7 @@
         "kind": 5,
         "importPath": "src.db.main",
         "description": "src.db.main",
-        "peekOfCode": "engine = AsyncEngine(create_engine(url=Config.DATABASE_URL, echo=True))\nasync def init_db():\n    async with engine.begin() as conn:\n        statement = text(\"SELECT 'hello';\")\n        result = await conn.execute(statement)\n        print(result.all())",
+        "peekOfCode": "engine = create_async_engine(Config.DATABASE_URL, echo=True)\nasync def init_db():\n    async with engine.begin() as conn:\n        from src.books.models import Book\n        await conn.run_sync(SQLModel.metadata.create_all)",
         "detail": "src.db.main",
         "documentation": {}
     },
