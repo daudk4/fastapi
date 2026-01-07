@@ -24,6 +24,22 @@
         "documentation": {}
     },
     {
+        "label": "select",
+        "importPath": "sqlmodel",
+        "description": "sqlmodel",
+        "isExtraImport": true,
+        "detail": "sqlmodel",
+        "documentation": {}
+    },
+    {
+        "label": "desc",
+        "importPath": "sqlmodel",
+        "description": "sqlmodel",
+        "isExtraImport": true,
+        "detail": "sqlmodel",
+        "documentation": {}
+    },
+    {
         "label": "SQLModel",
         "importPath": "sqlmodel",
         "description": "sqlmodel",
@@ -244,7 +260,7 @@
         "kind": 6,
         "importPath": "src.books.service",
         "description": "src.books.service",
-        "peekOfCode": "class BookService:\n    async def get_all_books(self, session: AsyncSession):\n        pass\n    async def get_book(self, book_id: str, session: AsyncSession):\n        pass\n    async def create_book(self, book_data: BookCreateModel, session: AsyncSession):\n        pass\n    async def update_book(\n        self, book_id: str, update_data: BookUpdateModel, session: AsyncSession\n    ):",
+        "peekOfCode": "class BookService:\n    async def get_all_books(self, session: AsyncSession):\n        statement = select(Book).order_by(desc(Book.created_at))\n        result = await session.exec(statement)\n        return result.all()\n    async def get_book(self, book_id: str, session: AsyncSession):\n        pass\n    async def create_book(self, book_data: BookCreateModel, session: AsyncSession):\n        pass\n    async def update_book(",
         "detail": "src.books.service",
         "documentation": {}
     },
