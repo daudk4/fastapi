@@ -260,7 +260,7 @@
         "kind": 6,
         "importPath": "src.books.service",
         "description": "src.books.service",
-        "peekOfCode": "class BookService:\n    async def get_all_books(self, session: AsyncSession):\n        statement = select(Book).order_by(desc(Book.created_at))\n        result = await session.exec(statement)\n        return result.all()\n    async def get_book(self, book_id: str, session: AsyncSession):\n        pass\n    async def create_book(self, book_data: BookCreateModel, session: AsyncSession):\n        pass\n    async def update_book(",
+        "peekOfCode": "class BookService:\n    async def get_all_books(self, session: AsyncSession):\n        statement = select(Book).order_by(desc(Book.created_at))\n        result = await session.exec(statement)\n        return result.all()\n    async def get_book(self, book_id: str, session: AsyncSession):\n        statement = select(Book).where(Book.uid == book_id)\n        result = await session.exec(statement)\n        return result.first()\n    async def create_book(self, book_data: BookCreateModel, session: AsyncSession):",
         "detail": "src.books.service",
         "documentation": {}
     },
