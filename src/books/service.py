@@ -35,4 +35,6 @@ class BookService:
         return book_to_update
 
     async def delete_book(self, book_id: str, session: AsyncSession):
-        pass
+        book_to_delete = await self.get_book(book_id, session)
+        await session.delete(book_to_delete)
+        await session.commit()
