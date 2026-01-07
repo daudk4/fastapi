@@ -57,6 +57,22 @@
         "documentation": {}
     },
     {
+        "label": "date",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
         "label": "uuid",
         "kind": 6,
         "isExtraImport": true,
@@ -130,6 +146,14 @@
         "documentation": {}
     },
     {
+        "label": "AsyncSession",
+        "importPath": "sqlmodel.ext.asyncio.session",
+        "description": "sqlmodel.ext.asyncio.session",
+        "isExtraImport": true,
+        "detail": "sqlmodel.ext.asyncio.session",
+        "documentation": {}
+    },
+    {
         "label": "create_async_engine",
         "importPath": "sqlalchemy.ext.asyncio",
         "description": "sqlalchemy.ext.asyncio",
@@ -193,7 +217,16 @@
         "kind": 6,
         "importPath": "src.books.schemas",
         "description": "src.books.schemas",
-        "peekOfCode": "class Book(BaseModel):\n    id: int\n    title: str\n    author: str\n    publisher: str\n    published_date: str\n    page_count: int\n    language: str\nclass BookUpdateModel(BaseModel):\n    title: str",
+        "peekOfCode": "class Book(BaseModel):\n    uid: uuid.UUID\n    title: str\n    author: str\n    publisher: str\n    published_date: str\n    page_count: int\n    language: str\n    created_at: datetime\n    updated_at: datetime",
+        "detail": "src.books.schemas",
+        "documentation": {}
+    },
+    {
+        "label": "BookCreateModel",
+        "kind": 6,
+        "importPath": "src.books.schemas",
+        "description": "src.books.schemas",
+        "peekOfCode": "class BookCreateModel(BaseModel):\n    title: str\n    author: str\n    publisher: str\n    published_date: str\n    page_count: int\n    language: str\nclass BookUpdateModel(BaseModel):\n    title: str\n    author: str",
         "detail": "src.books.schemas",
         "documentation": {}
     },
@@ -204,6 +237,15 @@
         "description": "src.books.schemas",
         "peekOfCode": "class BookUpdateModel(BaseModel):\n    title: str\n    author: str\n    publisher: str\n    published_date: str\n    page_count: int\n    language: str",
         "detail": "src.books.schemas",
+        "documentation": {}
+    },
+    {
+        "label": "BookService",
+        "kind": 6,
+        "importPath": "src.books.service",
+        "description": "src.books.service",
+        "peekOfCode": "class BookService:\n    async def get_all_books(self, session: AsyncSession):\n        pass\n    async def get_book(self, book_id: str, session: AsyncSession):\n        pass\n    async def create_book(self, book_data, session: AsyncSession):\n        pass",
+        "detail": "src.books.service",
         "documentation": {}
     },
     {
