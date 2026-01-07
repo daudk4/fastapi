@@ -1,4 +1,5 @@
 from sqlmodel.ext.asyncio.session import AsyncSession
+from .schemas import BookCreateModel, BookUpdateModel
 
 
 class BookService:
@@ -8,5 +9,10 @@ class BookService:
     async def get_book(self, book_id: str, session: AsyncSession):
         pass
 
-    async def create_book(self, book_data, session: AsyncSession):
+    async def create_book(self, book_data: BookCreateModel, session: AsyncSession):
+        pass
+
+    async def update_book(
+        self, book_id: str, update_data: BookUpdateModel, session: AsyncSession
+    ):
         pass

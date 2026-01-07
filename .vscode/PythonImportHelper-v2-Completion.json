@@ -235,7 +235,7 @@
         "kind": 6,
         "importPath": "src.books.schemas",
         "description": "src.books.schemas",
-        "peekOfCode": "class BookUpdateModel(BaseModel):\n    title: str\n    author: str\n    publisher: str\n    published_date: str\n    page_count: int\n    language: str",
+        "peekOfCode": "class BookUpdateModel(BaseModel):\n    title: str\n    author: str\n    publisher: str\n    page_count: int\n    language: str",
         "detail": "src.books.schemas",
         "documentation": {}
     },
@@ -244,7 +244,7 @@
         "kind": 6,
         "importPath": "src.books.service",
         "description": "src.books.service",
-        "peekOfCode": "class BookService:\n    async def get_all_books(self, session: AsyncSession):\n        pass\n    async def get_book(self, book_id: str, session: AsyncSession):\n        pass\n    async def create_book(self, book_data, session: AsyncSession):\n        pass",
+        "peekOfCode": "class BookService:\n    async def get_all_books(self, session: AsyncSession):\n        pass\n    async def get_book(self, book_id: str, session: AsyncSession):\n        pass\n    async def create_book(self, book_data: BookCreateModel, session: AsyncSession):\n        pass\n    async def update_book(\n        self, book_id: str, update_data: BookUpdateModel, session: AsyncSession\n    ):",
         "detail": "src.books.service",
         "documentation": {}
     },
