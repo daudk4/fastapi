@@ -130,11 +130,10 @@
         "documentation": {}
     },
     {
-        "label": "sqlmodel.ext.asyncio.session",
-        "kind": 6,
-        "isExtraImport": true,
+        "label": "AsyncSession",
         "importPath": "sqlmodel.ext.asyncio.session",
         "description": "sqlmodel.ext.asyncio.session",
+        "isExtraImport": true,
         "detail": "sqlmodel.ext.asyncio.session",
         "documentation": {}
     },
