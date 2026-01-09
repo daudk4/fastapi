@@ -285,7 +285,7 @@
         "kind": 5,
         "importPath": "src.db.main",
         "description": "src.db.main",
-        "peekOfCode": "async_engine = create_async_engine(Config.DATABASE_URL, echo=True)\nasync def init_db() -> None:\n    async with async_engine.begin() as conn:\n        from src.books.models import Book\n        await conn.run_sync(SQLModel.metadata.create_all)\nasync def get_session() -> AsyncSession:\n    Session = sessionmaker(\n        bind=async_engine, class_=AsyncSession, expire_on_commit=False\n    )\n    async with Session() as session:",
+        "peekOfCode": "async_engine = create_async_engine(Config.DATABASE_URL, echo=True)\n# THIS FUNCTION IS RESPONSIBLE FOR CREATING TABLES IN DATABASE\nasync def init_db() -> None:\n    async with async_engine.begin() as conn:\n        # IMPORTING MODELS INSIDE THE FUNCTION IS IMPORTANT BECAUSE SQLModel ONLY KNOWS ABOUT MODELS THAT HAVE BEEN IMPORTED.\n        from src.books.models import Book\n        await conn.run_sync(SQLModel.metadata.create_all)\n# THIS FUNCTION IS HOW YOUR API GETS A DB CONNECTION FOR EACH REQUEST.\n# WITHOUT THE SESSION YOU CANNOT QUERY THE DATABASE.\n# WITHOUT THE SESSION YOU CANNOT INSERT/UPDATE/DELETE DATA FROM DB.",
         "detail": "src.db.main",
         "documentation": {}
     },
