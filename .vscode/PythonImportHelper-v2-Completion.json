@@ -122,6 +122,39 @@
         "documentation": {}
     },
     {
+        "label": "Depends",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "sqlmodel.ext.asyncio.session",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "sqlmodel.ext.asyncio.session",
+        "description": "sqlmodel.ext.asyncio.session",
+        "detail": "sqlmodel.ext.asyncio.session",
+        "documentation": {}
+    },
+    {
+        "label": "AsyncSession",
+        "importPath": "sqlmodel.ext.asyncio.session",
+        "description": "sqlmodel.ext.asyncio.session",
+        "isExtraImport": true,
+        "detail": "sqlmodel.ext.asyncio.session",
+        "documentation": {}
+    },
+    {
+        "label": "AsyncSession",
+        "importPath": "sqlmodel.ext.asyncio.session",
+        "description": "sqlmodel.ext.asyncio.session",
+        "isExtraImport": true,
+        "detail": "sqlmodel.ext.asyncio.session",
+        "documentation": {}
+    },
+    {
         "label": "Book",
         "importPath": "src.books.schemas",
         "description": "src.books.schemas",
@@ -138,11 +171,19 @@
         "documentation": {}
     },
     {
-        "label": "books_db",
-        "importPath": "src.books.book_data",
-        "description": "src.books.book_data",
+        "label": "BookService",
+        "importPath": "src.books.service",
+        "description": "src.books.service",
         "isExtraImport": true,
-        "detail": "src.books.book_data",
+        "detail": "src.books.service",
+        "documentation": {}
+    },
+    {
+        "label": "get_session",
+        "importPath": "src.db.main",
+        "description": "src.db.main",
+        "isExtraImport": true,
+        "detail": "src.db.main",
         "documentation": {}
     },
     {
@@ -159,22 +200,6 @@
         "description": "pydantic",
         "isExtraImport": true,
         "detail": "pydantic",
-        "documentation": {}
-    },
-    {
-        "label": "AsyncSession",
-        "importPath": "sqlmodel.ext.asyncio.session",
-        "description": "sqlmodel.ext.asyncio.session",
-        "isExtraImport": true,
-        "detail": "sqlmodel.ext.asyncio.session",
-        "documentation": {}
-    },
-    {
-        "label": "AsyncSession",
-        "importPath": "sqlmodel.ext.asyncio.session",
-        "description": "sqlmodel.ext.asyncio.session",
-        "isExtraImport": true,
-        "detail": "sqlmodel.ext.asyncio.session",
         "documentation": {}
     },
     {
@@ -218,15 +243,6 @@
         "documentation": {}
     },
     {
-        "label": "books_db",
-        "kind": 5,
-        "importPath": "src.books.book_data",
-        "description": "src.books.book_data",
-        "peekOfCode": "books_db = [\n    {\n        \"id\": 1,\n        \"title\": \"Think Python\",\n        \"author\": \"Allen B. Downey\",\n        \"publisher\": \"O'Reilly Media\",\n        \"published_date\": \"2021-01-01\",\n        \"page_count\": 1234,\n        \"language\": \"English\",\n    },",
-        "detail": "src.books.book_data",
-        "documentation": {}
-    },
-    {
         "label": "Book",
         "kind": 6,
         "importPath": "src.books.models",
@@ -240,7 +256,16 @@
         "kind": 5,
         "importPath": "src.books.routes",
         "description": "src.books.routes",
-        "peekOfCode": "book_router = APIRouter()\n# GET ALL BOOKS\n@book_router.get(\"/\", response_model=List[Book])\nasync def get_all_books():\n    return books_db\n# CREATE BOOK\n@book_router.post(\"/\", status_code=status.HTTP_201_CREATED)\nasync def create_book(book_data: Book) -> dict:\n    new_book = book_data.model_dump()\n    # CHECK IF BOOK ID ALREADY EXISTS",
+        "peekOfCode": "book_router = APIRouter()\nbook_service = BookService()\n# GET ALL BOOKS\n@book_router.get(\"/\", response_model=List[Book])\nasync def get_all_books(session: AsyncSession = Depends(get_session)):\n    books = await book_service.get_all_books(session)\n    return books\n# CREATE BOOK\n@book_router.post(\"/\", status_code=status.HTTP_201_CREATED, response_model=Book)\nasync def create_book(",
+        "detail": "src.books.routes",
+        "documentation": {}
+    },
+    {
+        "label": "book_service",
+        "kind": 5,
+        "importPath": "src.books.routes",
+        "description": "src.books.routes",
+        "peekOfCode": "book_service = BookService()\n# GET ALL BOOKS\n@book_router.get(\"/\", response_model=List[Book])\nasync def get_all_books(session: AsyncSession = Depends(get_session)):\n    books = await book_service.get_all_books(session)\n    return books\n# CREATE BOOK\n@book_router.post(\"/\", status_code=status.HTTP_201_CREATED, response_model=Book)\nasync def create_book(\n    book_data: Book, session: AsyncSession = Depends(get_session)",
         "detail": "src.books.routes",
         "documentation": {}
     },
