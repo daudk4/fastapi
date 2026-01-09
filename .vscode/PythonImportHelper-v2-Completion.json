@@ -170,11 +170,27 @@
         "documentation": {}
     },
     {
+        "label": "AsyncSession",
+        "importPath": "sqlmodel.ext.asyncio.session",
+        "description": "sqlmodel.ext.asyncio.session",
+        "isExtraImport": true,
+        "detail": "sqlmodel.ext.asyncio.session",
+        "documentation": {}
+    },
+    {
         "label": "create_async_engine",
         "importPath": "sqlalchemy.ext.asyncio",
         "description": "sqlalchemy.ext.asyncio",
         "isExtraImport": true,
         "detail": "sqlalchemy.ext.asyncio",
+        "documentation": {}
+    },
+    {
+        "label": "sessionmaker",
+        "importPath": "sqlalchemy.orm",
+        "description": "sqlalchemy.orm",
+        "isExtraImport": true,
+        "detail": "sqlalchemy.orm",
         "documentation": {}
     },
     {
@@ -265,11 +281,11 @@
         "documentation": {}
     },
     {
-        "label": "engine",
+        "label": "async_engine",
         "kind": 5,
         "importPath": "src.db.main",
         "description": "src.db.main",
-        "peekOfCode": "engine = create_async_engine(Config.DATABASE_URL, echo=True)\nasync def init_db():\n    async with engine.begin() as conn:\n        from src.books.models import Book\n        await conn.run_sync(SQLModel.metadata.create_all)",
+        "peekOfCode": "async_engine = create_async_engine(Config.DATABASE_URL, echo=True)\nasync def init_db() -> None:\n    async with async_engine.begin() as conn:\n        from src.books.models import Book\n        await conn.run_sync(SQLModel.metadata.create_all)\nasync def get_session() -> AsyncSession:\n    Session = sessionmaker(\n        bind=async_engine, class_=AsyncSession, expire_on_commit=False\n    )",
         "detail": "src.db.main",
         "documentation": {}
     },
