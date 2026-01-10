@@ -89,6 +89,22 @@
         "documentation": {}
     },
     {
+        "label": "date",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
         "label": "uuid",
         "kind": 6,
         "isExtraImport": true,
@@ -155,6 +171,14 @@
     },
     {
         "label": "Book",
+        "importPath": "src.books.schemas",
+        "description": "src.books.schemas",
+        "isExtraImport": true,
+        "detail": "src.books.schemas",
+        "documentation": {}
+    },
+    {
+        "label": "BookCreateModel",
         "importPath": "src.books.schemas",
         "description": "src.books.schemas",
         "isExtraImport": true,
@@ -264,7 +288,7 @@
         "kind": 5,
         "importPath": "src.books.routes",
         "description": "src.books.routes",
-        "peekOfCode": "book_service = BookService()\n# GET ALL BOOKS\n@book_router.get(\"/\", response_model=List[Book])\nasync def get_all_books(session: AsyncSession = Depends(get_session)):\n    books = await book_service.get_all_books(session)\n    return books\n# CREATE BOOK\n@book_router.post(\"/\", status_code=status.HTTP_201_CREATED, response_model=Book)\nasync def create_book(\n    book_data: Book, session: AsyncSession = Depends(get_session)",
+        "peekOfCode": "book_service = BookService()\n# GET ALL BOOKS\n@book_router.get(\"/\", response_model=List[Book])\nasync def get_all_books(session: AsyncSession = Depends(get_session)):\n    books = await book_service.get_all_books(session)\n    return books\n# CREATE BOOK\n@book_router.post(\"/\", status_code=status.HTTP_201_CREATED, response_model=Book)\nasync def create_book(\n    book_data: BookCreateModel, session: AsyncSession = Depends(get_session)",
         "detail": "src.books.routes",
         "documentation": {}
     },
@@ -273,7 +297,7 @@
         "kind": 6,
         "importPath": "src.books.schemas",
         "description": "src.books.schemas",
-        "peekOfCode": "class Book(BaseModel):\n    uid: uuid.UUID\n    title: str\n    author: str\n    publisher: str\n    published_date: str\n    page_count: int\n    language: str\n    created_at: datetime\n    updated_at: datetime",
+        "peekOfCode": "class Book(BaseModel):\n    uid: uuid.UUID\n    title: str\n    author: str\n    publisher: str\n    published_date: date\n    page_count: int\n    language: str\n    created_at: datetime\n    updated_at: datetime",
         "detail": "src.books.schemas",
         "documentation": {}
     },
@@ -282,7 +306,7 @@
         "kind": 6,
         "importPath": "src.books.schemas",
         "description": "src.books.schemas",
-        "peekOfCode": "class BookCreateModel(BaseModel):\n    title: str\n    author: str\n    publisher: str\n    published_date: str\n    page_count: int\n    language: str\nclass BookUpdateModel(BaseModel):\n    title: str\n    author: str",
+        "peekOfCode": "class BookCreateModel(BaseModel):\n    title: str\n    author: str\n    publisher: str\n    published_date: date\n    page_count: int\n    language: str\nclass BookUpdateModel(BaseModel):\n    title: str\n    author: str",
         "detail": "src.books.schemas",
         "documentation": {}
     },
